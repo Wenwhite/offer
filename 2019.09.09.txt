@@ -65,3 +65,27 @@ abstract类中定义的抽象方法必须在具体子类中实现，所以不能
 ③抽象类中可以包含非抽象的普通方法，接口中的所有方法必须是抽象的，不能有非抽象的普通方法。
 ④抽象类中的抽象方法的访问类型可以是public，protected，但接口中的抽象方法只能是public类型的，并且默认为public abstract类型。
 ⑤抽象类中可以包含静态方法，接口中不能包含静态方法。
+
+12.String是最基本的数据类型吗。
+不属于。
+Java.lang.String类是final类型的，因此不可以继承这个类，不能修改这个类。为了提高效率节省空间，应该使用StringBuffer类。
+
+13.String s = "Hello";s = s + "world!";这两行代码执行后，原始的String对象中的内容到底变了没有。
+没有。
+String被设计成不可变（immutable）类，所以它的所有对象都是不可变的对象。
+代码中，s先指向了一个值为"Hello"的String对象，s进行+操作后，s指向了另一个值为"Helloworld!"的String对象，原来的那个对象还存在内存之中，只是s不再指向它了。
+
+14.是否可以继承String类
+String是final类故不可以继承。
+
+15.String和StringBuffer的区别
+Java提供了两个类：String和StringBuffer，用来储存和操作字符串。
+String类表示内容不可变的字符串，StringBuffer类表示内容可以被修改的字符串。
+String实现了equals方法和hashCode方法，而StringBuffer没有，因此，将StringBuffer存进Java集合类中时会出现问题。
+
+16.StringBuffer和StringBuilder的区别
+二者都表示内容可以被修改的字符串。
+StringBuilder是线程不安全的，运行效率高，StringBuffer线程安全。
+
+17.数组有没有length()这个方法？String有没有length()这个方法。
+数组没有length()方法，但是有length属性。String有length()方法。
