@@ -29,3 +29,39 @@ int是Java提供的8种原始数据类型之一。（int short long double float
 Integer是Java提供的8种封装类之一（Integer Short Long Double Float Character Byte Boolean）
 int默认值位0，而Integer默认值为null，即Integer可以区分出未赋值和值为0的区别，int无法表达出未赋值的情况。
 在JSP开发中，Integer默认为null，所以用el表达式在文本框中显示时，值为空白字符串，而int默认值为0。所以用el表达式在文本框中显示时，结果为0，故int不适合作为web层的表单数据的类型。
+
+7.作用域public，private，protected，以及不写时的区别
+作用域 		当前类 同一package 子孙类 其他package
+public			√		√		√		√
+protected		√		√		√		×
+不写（friendly）	√		√		×		×
+private			√		×		×		×
+
+8.Overload和Override的区别
+重载Overload表示同一个类中可以有多个名称相同的方法，但这些方法的参数列表各不相同（参数的个数或类型不同）。
+重写（覆盖）Override表示子类中的方法可以与父类中的某个方法的名称和参数完全相同，通过子类创建的实例调用方法将会调用子类的方法，相当于把父类的方法给覆盖掉了，这是多态性的一种表现。
+需要注意的是 重写的方法只能比父类抛出更少的异常，重写方法的访问权限只能比父类的更大，如果父类的方法是private，那么子类不存在重写的限制，相当于是一个子类的新方法。
+
+9.如何实现线程间的通讯
+wait()、notify()、notifyAll()
+wait():可以使调用该方法的线程释放共享资源的锁，然后从运行态退出，进入等待队列，直到被再次唤起。
+notify():可以唤醒等待队列总第一个等待同意共享资源的线程，并使该线程退出等待队列，进入可运行态。
+notifyAll():使所有正在等待队列中等待同一共享资源的线程从等待状态退出，进入可运行状态，此时优先级最高的线程最先执行。
+利用这些方法，在需要的时候直接唤醒等待队列中的线程，而不用再循环检测共享资源的状态，不但节省了宝贵的CPU资源，也提高了程序大的效率。
+＊wait()方法声明时会抛出InterruptedException异常，因此，需将它放入try...catch...中，并且使用时需把它放在一个同步代码块里，否则会出现如下异常java.lang.IllegalMonitorStateException: current thread not owner*
+
+10.构造器Constructor能否被Override。
+构造器Constructor不能被继承，因此不能被重写Override，但是可以被重载Overload
+
+11.abstract class和interface的区别
+abstract类不能创建实例对象，含有abstract方法的类必须定义为抽象类，抽象类中的方法不必是抽象方法。
+abstract类中定义的抽象方法必须在具体子类中实现，所以不能有抽象构造方法或抽象静态方法。如果子类没有实现抽象父类中的所有抽象方法，那么子类也必须定义为abstract类型。
+
+接口(interface)可以说成是抽象类的一种特例，接口中的所有方法都必须是抽象的。接口中的方法定义默认为public abstract类型，接口中的成员变量类型默认为public static final。
+
+二者语法区别：
+①抽象类可以有构造方法，接口中不能有构造方法。
+②抽象类中可以有普通成员变量，接口中没有普通成员变量。
+③抽象类中可以包含非抽象的普通方法，接口中的所有方法必须是抽象的，不能有非抽象的普通方法。
+④抽象类中的抽象方法的访问类型可以是public，protected，但接口中的抽象方法只能是public类型的，并且默认为public abstract类型。
+⑤抽象类中可以包含静态方法，接口中不能包含静态方法。
