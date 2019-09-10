@@ -50,7 +50,7 @@ notifyAll():使所有正在等待队列中等待同一共享资源的线程从�
 利用这些方法，在需要的时候直接唤醒等待队列中的线程，而不用再循环检测共享资源的状态，不但节省了宝贵的CPU资源，也提高了程序大的效率。
 ＊wait()方法声明时会抛出InterruptedException异常，因此，需将它放入try...catch...中，并且使用时需把它放在一个同步代码块里，否则会出现如下异常java.lang.IllegalMonitorStateException: current thread not owner*
 
-10.构造器Constructor能否被Override。
+10.构造器Constructor能否被Override
 构造器Constructor不能被继承，因此不能被重写Override，但是可以被重载Overload
 
 11.abstract class和interface的区别
@@ -66,11 +66,11 @@ abstract类中定义的抽象方法必须在具体子类中实现，所以不能
 ④抽象类中的抽象方法的访问类型可以是public，protected，但接口中的抽象方法只能是public类型的，并且默认为public abstract类型。
 ⑤抽象类中可以包含静态方法，接口中不能包含静态方法。
 
-12.String是最基本的数据类型吗。
+12.String是最基本的数据类型吗
 不属于。
 Java.lang.String类是final类型的，因此不可以继承这个类，不能修改这个类。为了提高效率节省空间，应该使用StringBuffer类。
 
-13.String s = "Hello";s = s + "world!";这两行代码执行后，原始的String对象中的内容到底变了没有。
+13.String s = "Hello";s = s + "world!";这两行代码执行后，原始的String对象中的内容到底变了没有
 没有。
 String被设计成不可变（immutable）类，所以它的所有对象都是不可变的对象。
 代码中，s先指向了一个值为"Hello"的String对象，s进行+操作后，s指向了另一个值为"Helloworld!"的String对象，原来的那个对象还存在内存之中，只是s不再指向它了。
@@ -87,5 +87,5 @@ String实现了equals方法和hashCode方法，而StringBuffer没有，因此，
 二者都表示内容可以被修改的字符串。
 StringBuilder是线程不安全的，运行效率高，StringBuffer线程安全。
 
-17.数组有没有length()这个方法？String有没有length()这个方法。
+17.数组有没有length()这个方法？String有没有length()这个方法
 数组没有length()方法，但是有length属性。String有length()方法。
