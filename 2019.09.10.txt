@@ -75,3 +75,12 @@ Set元素是否重复使用equals方法进行判断，为的是当两个分离�
 (web开发中，如果对象被存储到了Session中，tomcat再重启时要把Session对象序列化到硬盘，这个对象就必须实现Serializable接口)
 (如果对象要经过分布式系统进行网络传输或者通过rmi等远程调用，这就需要在网络上传输对象，此时该对象必须实现Serializable接口)
 
+32.能不能自己写个类，也叫java.lang.String？
+可以，但在应用的时候，需要用自己的类加载器去加载。否则系统的类加载器永远只是去加载jre.jar包中的java.lang.String。
+(tomcat的web应用中，都是由webapp自己的类加载器先自己加载web-INF/classess目录中的类，然后才委托上级的类加载器加载。
+如果我们在tomcat的web应用程序中写一个java.lang.String，这时候Servlet加载的就是自己写的String，但是会有很多潜在问题)
+(Java提供了endorsed技术，可以覆盖jdk中的某些类，但有限制范围，不包括java.lang下的类)
+
+33.一个.java源文件中是否可以包括多个类(非内部类)？有什么限制？
+可以有多个类，但只能有一个public的类，且public的类名必须与文件名一致。
+
