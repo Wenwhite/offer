@@ -162,3 +162,27 @@ class信息主要包括魔数(确定是否是一个class文件)、常量池、
 
 6.常量池
 是方法池中的一部分，存放class对象中最重要的资源。JVM为每一个class对象都维护一个常量池。
+
+36.八个基本类型各占多少字节？
+byte 1字节；char 2字节；
+short 2字节；int 4字节；long 8字节；
+float 4字节；double 8字节；
+boolean 1字节；
+
+37.HashMap、HashSet、HashTable的区别？
+【1】继承的父类不同
+HashTable继承自Dictionary类，而HashMap继承自AbstractMap类。但两者都实现了Map接口。
+【2】线程安全性不同
+HashTable中的方法是synchronized的，而HashMap中的方法在缺省情况下是非synchronized的。
+【3】是否提供contains方法
+HashMap把HashTable的contains方法去掉了，改成了containsValue和containsKey。
+而HashTable则保留了contains方法和前两个方法，其中contains和containsvalue功能相同。
+【4】key和value是否允许为null值
+HashTable中key和value都不允许出现null。HashMap中，null可以作为key(只存在一个)，可以作为value(可以存在多个)。
+当get()方法返回null值时，可能是HashMap中没有该key，也可能是其对应的value是null。
+因此，HashMap中，判断某个key是否存在，应该用containsKey()方法进行判断。
+【5】哈希值的计算方法不同
+HashTable直接使用对象的hashcode，而HashMap则是在对象的hashCode基础上进行了一些变化。
+【6】内部实现使用的数组初始化和扩容方式不同，内存初始大小不同。
+HashTable初始大小是11，而HashMap初始大小是16。
+
