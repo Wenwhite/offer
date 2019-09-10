@@ -1,0 +1,37 @@
+18.try{}里面有一个return语句，那么紧跟在这个try后面的finally{}里的code会不会被执行，什么时候被执行，在return前还是return后
+会执行，在return后被执行。
+
+19.final，finally，finalize的区别
+final用户声明属性、方法和类，分别表示属性不可变，方法不可覆盖，类不可继承。
+内部类要访问局部变量，局部变量必须定义为final类型。
+finally是异常处理语句结构的一部分，表示总是执行。
+finalize是Object类的一个方法，在垃圾收集器执行的时候会调用被回收对象的此方法，可以覆盖此方法提供垃圾收集时的其他资源回收，例如关闭文件等。(JVM不保证此方法总被调用)。
+
+20.运行时异常与一般异常有何异同
+异常表示程序运行过程中可能出现的非正常状态。
+运行时异常表示虚拟机的通常操作中可能遇到的异常，是一种常见运行错误。
+Java编译器要求方法必须声明抛出可能发生的非运行时异常，但是不要求必须声明抛出未被捕获的运行时异常。
+
+21.Java如何进行异常处理，throws，throw，try，catch，finally分别代表什么意义？在try中可以抛出异常吗
+throws是获取异常；throw是抛出异常；try是将会发生的异常的语句括起来，进行异常的处理；catch是如果有异常就会执行它里面的语句；finally不论是否有异常都会执行语句。
+throws和throw的详细区别：
+	throw是语法抛出一个异常。语法：throw (异常对象)；throw e；
+	throws是方法可能抛出异常的声明。(用在声明方法时，表示该方法可能要抛出异常)
+	语法：(修饰符)(方法名)([参数列表])[throws(异常类)]{...}public void doA(int a) throws Exception1,Exception2{...}
+
+22.Java中有几种方法可以实现一个线程？用什么关键字修饰同步方法
+第一种：
+new Thread(){}.start();表示调用Thread子类对象的run方法，new Thread(){}表示一个Thread的匿名子类的实例对象。
+第二种：
+new Thread(new Runnable(){}).start;表示调用Thread对象接受的Runnable对象的run方法，new Runnable(){}表示一个Runnable的匿名子类的实例对象。
+第三种：
+线程池创造。
+
+用synchronized关键字修饰同步方法
+
+23.sleep()和wait()有什么区别
+sleep是线程类Thread的方法，导致此线程暂停执行指定时间，给执行机会给其他线程，但是监控状态依然保持，到时后会自动恢复。(调用sleep不会释放对象锁)
+wait是Object类的方法对此对象调用wait方法导致本线程放弃对象锁，进入等待此对象的等待锁定池，只有针对此对象发出的notify(notifyAll)方法后本线程才进入对象锁定池准备获得对象锁进入运行状态。
+
+24.启动一个线程是用run()还是start()
+启动一个线程是调用start()方法，使线程就绪状态，以后可以被调度为运行状态，一个线程必须管理李安一些具体的执行代码，run()方法是该线程所关联的执行代码。
