@@ -15,9 +15,10 @@ Java编译器要求方法必须声明抛出可能发生的非运行时异常，�
 21.Java如何进行异常处理，throws，throw，try，catch，finally分别代表什么意义？在try中可以抛出异常吗
 throws是获取异常；throw是抛出异常；try是将会发生的异常的语句括起来，进行异常的处理；catch是如果有异常就会执行它里面的语句；finally不论是否有异常都会执行语句。
 throws和throw的详细区别：
-	throw是语法抛出一个异常。语法：throw (异常对象)；throw e；
-	throws是方法可能抛出异常的声明。(用在声明方法时，表示该方法可能要抛出异常)
-	语法：(修饰符)(方法名)([参数列表])[throws(异常类)]{...}public void doA(int a) throws Exception1,Exception2{...}
+throw是语法抛出一个异常。
+语法：throw (异常对象)；throw e；
+throws是方法可能抛出异常的声明。(用在声明方法时，表示该方法可能要抛出异常)
+语法：(修饰符)(方法名)([参数列表])[throws(异常类)]{...}public void doA(int a) throws Exception1,Exception2{...}
 
 22.Java中有几种方法可以实现一个线程？用什么关键字修饰同步方法
 第一种：
@@ -44,6 +45,33 @@ List中存储的数据是有序的，且允许重复，Map中的数据是无序�
 List、Set继承，Map未继承。
 
 27.说说List、Set，Map的存储性能和特性
-首先，List和Set具有相似性，都是单列元素的集合，有一个共同的父接口，叫Collection。
+List和Set具有相似性，都是单列元素的集合，有一个共同的父接口，叫Collection。
 Set里面不允许有重复的元素(不能加入两个相等的对象，add方法返回值为false)。Set取元素时，没法说取第几个，只能以Iterator接口取得所有的元素，再遍历各个元素。
-List表示有先后顺序的集合。add(int index, Object e)方法可以指定插入的位置。一个对象可以反复存储进List中，每调用一次add，在集合中用一个索引变量指向这个对象，当此对象被add多次时，相当于集合中有多个索引指向了这个对象。除了可以用Iterator接口取得所有的元素再逐一遍历，还可以调用get(index i)明确说明取第几个。
+List表示有先后顺序的集合。add(int index, Object e)方法可以指定插入的位置。一个对象可以反复存储进List中。
+每调用一次add，在集合中用一个索引变量指向这个对象，当此对象被add多次时，相当于集合中有多个索引指向了这个对象。除了可以用Iterator接口取得所有的元素再逐一遍历，还可以调用get(index i)明确说明取第几个。
+Map与前两者不同，是双列集合。put(Object key, Object value)不能存储重复的key，重复的规则也是按equals比较相等。
+
+List以特定次序持有元素，可以有重复元素。Set不能有重复元素，内部排序。Map可以有重复的value，不能有重复的key。
+(HashSet按照hashcode值的某种运算方式进行存储，而不是直接按照hashcode值的大小进行存储。
+LinkedHashSet按插入的顺序存储，此时判断hashSet集合中两个对象是否相等，会先判断hashcode是否相等，再看equals是否相等。)
+
+28.Set里的元素是不能重复的，那么用什么方法来区分重复呢？使用==还是equals？有何区别？
+Set元素是否重复使用equals方法进行判断，为的是当两个分离的对象的内容和类型相配的时候，返回真值。
+
+29.Java中有几种类型的流？JDK为每种类型的流提供了一些抽象类以供继承，请说出他们分别是哪些类
+字节流和字符流。
+字节流继承于InputStream和OutputStream，
+字符流继承于InputStreamReader和OutputStreamWriter。
+
+30.字节流和字符流的区别
+字节流针对字节进行操作，主要用于二进制数据的输入输出，更面向于设备。
+字符流针对字符进行操作，主要用于将二进制字节转换成字符，更面向于用户。
+(字符流是字节流的包装；字符字节转换时，要注意编码问题)
+
+31.什么是Java序列化？如何实现Java序列化？请解释Serializable接口的作用
+①将一个Java对象转换成字节流的形式或者从一个字节流中恢复一个Java对象时，这个Java类必须实现serializable接口。
+这样，javac编译时就会进行特殊处理，编译的类才可以被字节流方法操作，这就是所谓的序列化。
+③实现序列化必须实现Serialiable接口，该接口是一个mini接口，其中没有要实现的方法，只是为了标注该对象是可被序列化的。
+(web开发中，如果对象被存储到了Session中，tomcat再重启时要把Session对象序列化到硬盘，这个对象就必须实现Serializable接口)
+(如果对象要经过分布式系统进行网络传输或者通过rmi等远程调用，这就需要在网络上传输对象，此时该对象必须实现Serializable接口)
+
