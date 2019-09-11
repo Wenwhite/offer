@@ -1,0 +1,21 @@
+38.HashCode和equals
+equals：
+Object类默认的实现是：return this == obj。即只有this和obj引用同一个对象，才会返回true。
+而我们往往需要用equals来判断2个对象是否等价，而非验证他们的唯一性。这样在实现自己的类时，需要重写equals。
+按约定，equals要满足以下规则。
+[自反性]：x.equals(x)==true
+[对null]：x.equals(null)==false
+[对称性]：x.equals(y)==y.equals(x)
+[传递性]：a.equals(b)==true && b.equals(c)==true => a.equals(c)==true
+
+Hashcode：
+此方法返回对象的散列码，返回值时int类型的散列码。对象的散列码是为了更好的支持基于哈希机制的Java集合类，如HashTable，HashMap等。
+关于hashcode方法，一致的约定是：重写equals方法的对象必须同时重写hashCode()方法。
+如果2个对象通过equals调用后返回true，那么这2个对象的hashCode方法也必须返回同样的int型散列码。
+如果2个对象通过equals调用后返回true，那么这2个对象的hashCode方法返回值允许相同。
+(然而，必须认识到，hashcode返回独一无二的散列码，会让存储这个对象的hashTable更好的工作)
+(为保证以上约定，参与equals方法的字段，也必须都参加hashCode的计算)
+hashcode一致约定要求：
+【1】某个运行时期间，只要对象的(字段)变化不会影响equals方法的决策结果，那么，在这个期间，无论调用多少次hashcode，都必须返回同一个散列码。
+【2】通过equals调用返回true的2个对象的hashcode一定一样。
+【3】通过equals调用返回false的2个对象的散列码不需要不同(等价对象必须产生相同的散列码，不等价对象不要求产生的散列码不相同)
