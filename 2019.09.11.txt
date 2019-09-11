@@ -44,3 +44,6 @@ hashcode一致约定要求：
 40.junit中before和beforeclass的区别
 @before：在每个测试方法之前都会执行一次，只需声明成public。
 @beforeclass：在类中只运行一次，必须声明成public static
+
+41.触发器的作用是什么
+比如说emp和dept两张表是有外键关联的，当emp存在相关数据时，dept无法删除数据，这时候就可以写个触发器，让他可以删除的同时对emp表的依赖数据发生变化。
