@@ -84,3 +84,15 @@ SELECT--FROM--WHERE--GROUP BY--HAVING--ORDER BY
 ·ORDER　BY：按照什么样的顺序来查看返回的数据
 FROM后面的表关联是自右向左解析，而WHERE条件的解析顺序是自下而上的。
 也就是说，在写SQL语句的时候，尽量把数据小的表放在最有百年来进行关联(用小表去匹配大表)，而把能筛选出小量数据的条件放在WHERE语句的最左边(用小表去匹配大表)。
+
+5.什么是临时表，临时表什么删除？
+当工作在非常大的表上，可能偶尔需要运行很多查询获得一个大量数据的小的子集，不是对整个表运行这些查询，而是让MySQL每次找出所需的少数记录，将记录选择到一个临时表可能更快些，然后在这些表运行查询。
+临时表可以手动删除：
+DROP TEMPORARY TABLE IF EXIST temp_tb;
+临时表只在当前连接可见，当关闭连接时，MySQL会自动删除表并释放所有空间。因此在不同的连接中可以创建同名的临时表，并且操作属于本链接的临时表。
+创建临时表的语法与创建表语法类似，不同之处是增加关键字TEMPORARY
+CREATE TEMPORARY TABLE tmp_table (
+	name VARCHAR(10) NOT NULL,
+	time DATE NOT NULL
+);
+SELECT * FROM tmp_table;
