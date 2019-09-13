@@ -43,3 +43,9 @@ MySQL proxy并不负责怎么从众多的slaves挑一个？可以交给另一个
 问题4：如果MySQL proxy，direct，master他们中的某些挂了怎么办？
 -可以给这些关键的节点来个备份。
 
+问题5：当master的二进制日志每产生一个时间，都需要发往slave，如果我们有N个slave，那是发N次，还是发1次？
+-显然，应该发送N次。
+实际上，在MySQL master内部，维护N个线程，每一个线程负责将二进制日志文件发往对应的slave。
+master既要负责写操作，还要维护N个线程，负担会很重。
+可以这样，slave-1是master的从，同时又是slave-2，slave-3....的主。
+与此同时，slave-1不再负责SELECT操作，而是专程负责master的复制线程的负担，这就是所谓的多层复制的概念。
