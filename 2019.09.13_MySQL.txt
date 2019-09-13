@@ -49,3 +49,6 @@ MySQL proxy并不负责怎么从众多的slaves挑一个？可以交给另一个
 master既要负责写操作，还要维护N个线程，负担会很重。
 可以这样，slave-1是master的从，同时又是slave-2，slave-3....的主。
 与此同时，slave-1不再负责SELECT操作，而是专程负责master的复制线程的负担，这就是所谓的多层复制的概念。
+
+问题6：当一个SELECT发往MySQL proxy，可能这次由slave-2响应，下次由slave-3响应，这样就无法利用查询缓存了？
+-找一个共享式缓存，比如memcache来解决。将slave-2，slave-3...这些查询结果都缓存至memcache中。
