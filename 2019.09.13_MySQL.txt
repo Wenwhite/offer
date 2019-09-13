@@ -39,3 +39,7 @@ master只保证slaves中的一个操作成功，就返回。其他slave不管，
 MySQL proxy并不负责怎么从众多的slaves挑一个？可以交给另一个组件(比如哈proxy)来完成。
 
 这就是所谓的MySQL READ WRITE SPLTTE，MySQL的读写分离。 
+
+问题4：如果MySQL proxy，direct，master他们中的某些挂了怎么办？
+-可以给这些关键的节点来个备份。
+
