@@ -29,3 +29,13 @@ master只保证slaves中的一个操作成功，就返回。其他slave不管，
 异地容灾，比如master在北京，地震挂了，那么在上海的slave还可以继续。
 主要用于实现scale out，分担负载，可以将读的任务分散到slaves上。
 (很可能的情况是，一个系统的读操作远远多于写操作，因此写操作发向master，读操作发向slaves进行操作)
+
+问题3：主从复制中有master，slave1，slave2，...等等这么多的MySQL数据库，那比如一个Java web应用到底该连接哪个数据库？
+-再应用中可以这样，INSERT/DELETE/UPDATE这些更新数据库的操作，用connection(for master)进行操作，SELECT用connection(for slaves)进行操作。
+那么，我们的应用程序还要完成怎么从slaves选择一个来执行SELECT，可以使用一个简单的轮询算法。
+这样的话，相当于应用程序完成了SQL语句的路由，而且与MySQL的主从复制架构非常关联。一旦master挂了，某些slave挂了，那么应用程序就需要修改了。
+能不能让应用程序与MySQL的主从复制架构没有什么太多关系呢？
+-找一个组件，application.program只需要与它打交道，用它来完成MySQL的代理，实现SQL语句路由。
+MySQL proxy并不负责怎么从众多的slaves挑一个？可以交给另一个组件(比如哈proxy)来完成。
+
+这就是所谓的MySQL READ WRITE SPLTTE，MySQL的读写分离。 
