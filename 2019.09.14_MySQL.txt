@@ -6,3 +6,6 @@
 例如，下面使用等值连接刘娥出authors和publishers表中位于同一城市的作者和出版社：
 SELECT * FROM authors AS a INNER JOIN publishers AS p ON a.citt=p.city;
 Ⅱ不等连接：在连接条件中使用除等于运算符以外的其他比较运算符比较被连接的列的列值。这些运算符包括>，>=，<，<=，!>，!<和<>。
+Ⅲ自然连接：在连接条件中使用等于(=)运算符比较被连接的列的列值，但它使用选择列表指出查询结果集合中所包括的列，并删除连接表中的重复列。
+例如，在选择列表中删除authors和publishers表中重复列(city和state)：
+SELECT a.*,p.pub_id,p.pub_name,p.pub_country FROM authors AS a INNER JOIN publishers AS p ON a.city=p.city;
