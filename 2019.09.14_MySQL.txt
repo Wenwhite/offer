@@ -9,3 +9,5 @@ SELECT * FROM authors AS a INNER JOIN publishers AS p ON a.citt=p.city;
 Ⅲ自然连接：在连接条件中使用等于(=)运算符比较被连接的列的列值，但它使用选择列表指出查询结果集合中所包括的列，并删除连接表中的重复列。
 例如，在选择列表中删除authors和publishers表中重复列(city和state)：
 SELECT a.*,p.pub_id,p.pub_name,p.pub_country FROM authors AS a INNER JOIN publishers AS p ON a.city=p.city;
+【外连接】
+返回到查询结果集合中的不仅包含符合连接条件的行，而且还包括左表(左外连接或左连接)、右表(右外连接或右连接)或两个边接表(全外连接)中的所有数据行。
