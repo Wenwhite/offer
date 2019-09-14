@@ -17,3 +17,5 @@ SELECT a.*,p.pub_id,p.pub_name,p.pub_country FROM authors AS a INNER JOIN publis
 交叉连接不带WHERE子句，它返回被连接的两个表所有数据行的"笛卡尔积"，返回到结果集合中的数据行数等于第一个表中符合查询条件的数据乘以第二个表中符合查询条件的数据行数。
 例如，titles表中有6类图书，而publishers表中有8家出版社，则下列交叉连接检索到的记录数将有6*8=48行。
 SELECT type,pub_name FROM titles CROSS JOIN publishers ORDER BY type;
+【笛卡尔积】
+是两个表每一个字段相互匹配，去掉WHERE或者INNER JOIN的等值 得出的结果就是笛卡尔积。笛卡尔积也等同于交叉连接。
