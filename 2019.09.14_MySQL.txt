@@ -11,3 +11,5 @@ SELECT * FROM authors AS a INNER JOIN publishers AS p ON a.citt=p.city;
 SELECT a.*,p.pub_id,p.pub_name,p.pub_country FROM authors AS a INNER JOIN publishers AS p ON a.city=p.city;
 【外连接】
 返回到查询结果集合中的不仅包含符合连接条件的行，而且还包括左表(左外连接或左连接)、右表(右外连接或右连接)或两个边接表(全外连接)中的所有数据行。
+·left join(左连接)：返回包括左表中的所有记录和右表中联结字段相等的记录
+·right join(右连接)：返回包括右表中的所有记录和左表中联结字段相等的记录
