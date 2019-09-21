@@ -35,3 +35,7 @@ Spring框架支持以下5种不同的作用域：
 ·session：一个HTTP Session定义一个bean。该作用域仅适用于WebApplicationContext环境。
 ·globalSession：同一个全局HTTP Session定义一个bean。该作用域同样仅适用于WebApplicationContext环境。
 bean默认的scope属性值为"singleton"。
+
+6.Spring的单例实现原理
+Spring框架对单例的支持是采用单例注册表的方式进行实现的，而这个注册表的缓存是HashMap对象。
+如果配置文件种的配置信息不要求使用单例，Spring会采用新建实例的方式返回对象实例。
