@@ -39,3 +39,22 @@ bean默认的scope属性值为"singleton"。
 6.Spring的单例实现原理
 Spring框架对单例的支持是采用单例注册表的方式进行实现的，而这个注册表的缓存是HashMap对象。
 如果配置文件种的配置信息不要求使用单例，Spring会采用新建实例的方式返回对象实例。
+
+7.解释Spring框架中bean的生命周期
+ApplicationContext容器中，bean的生命周期流程大致如下：
+Step1：容器启动，对scope为singleton且非懒加载的bean进行实例化。
+Step2：按照bean定义信息配置信息，注入所有的属性。
+Step3：如果bean实现了BeanNameAware接口，回调该接口的setBeanName()方法，传入该bean的id，此时该bean就获得了自己在配置文件中的id。
+Step4：如果bean实现了BeanFactoryAware接口，回调该接口的setBeanFactory()方法，传入该bean的beanFactory，这样该bean就获得了自己所在的beanFactory。
+Step5：如果bean实现了ApplicationContextAware接口，回调该接口的setApplicationContext()方法，传入该bean的ApplicationContext，这样该bean就获得了自己所在的ApplicationContext。
+Step6：如果有bean实现了BeanPostProcessor接口，则会回调该接口的postProcessBeforeInitialzation()方法。
+Step7：如果bean实现了InitializingBean接口，则会回调该接口的afterPropertiesSet()方法。
+Step8：如果bean配置了init-method方法，则会执行init-method配置的方法。
+Step9：如果有bean实现了BeanPostProcessor接口，则会回调该接口的postProcessAfterInitialzation()方法。
+Step10：经过以上9步后，就可以正式使用该bean了。
+	对于scope为singleton的bean，Spring的IOC容器中会缓存一份该bean的实例。
+	而对于scope为prototype的bean，每次被调用都会new一个新的对象，其生命周期将交给调用方管理，不再是Spring容器进行管理。
+...容器运行...
+Step11：容器关闭后，如果bean实现了DisposableBean接口，则会回调该接口的destroy()方法。
+Step12：如果bean配置了destroy-method方法，则会执行destroy-method配置的方法。
+至此，整个bean的生命周期结束。
