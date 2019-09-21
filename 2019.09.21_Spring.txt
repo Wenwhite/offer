@@ -26,3 +26,12 @@ Step11：前端控制器向用户响应结果。
 Spring Bean是构成Spring应用核心的Java对象。这些对象由Spring IOC容器实例化、组装、管理。这些对象通过容器中配置的元数据创建，例如使用XML文件中的定义。
 在<bean>标签中有一个属性为"singleton"，如果设为true，则该bean是单例的，如果设为false，该bean是原型bean。
 Singleton属性默认值问true，因此，Spring框架中的所有bean都默认为单例bean。
+
+5.说一下Spring中支持的bean作用域
+Spring框架支持以下5种不同的作用域：
+·singleton：在Spring IOC容器中仅存在一个bean实例，bean以单实例的方式存在。
+·prototype：一个bean可以定义多个实例。
+·request：每次HTTP请求都会创建一个新的bean。该作用域仅适用于WebApplicationContext环境。
+·session：一个HTTP Session定义一个bean。该作用域仅适用于WebApplicationContext环境。
+·globalSession：同一个全局HTTP Session定义一个bean。该作用域同样仅适用于WebApplicationContext环境。
+bean默认的scope属性值为"singleton"。
