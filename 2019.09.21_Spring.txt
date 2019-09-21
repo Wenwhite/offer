@@ -5,6 +5,19 @@
 【容器】：包含并管理应用对象程序对象的配置和生命周期。
 【事务管理】：对下至本地上至全局业务(JAT)提供了统一的事务管理接口。
 
-２.Spring事务实现方式
+2.Spring事务实现方式
 ·编程式事务管理：通过编程的方式管理事务。带来了很大的灵活性，但很难维护。
 ·声明式事务管理：可以将事务管理和业务代码分离，只需要通过注解或者XML配置管理事务。
+
+3.Spring MVC运行流程
+Step1：发起请求到前端控制器(DispatcherServlet)。
+Step2：前端控制器请求HandlerMapping查找Handler(根据XML配置、注解进行查找)。
+Step3：处理器映射器HandlerMapping向前端控制器返回Handler。
+Step4：前端控制器调用处理器适配器去执行Handler。
+Step5：处理器适配器去执行Handler。
+Step6：Handler执行完成给适配器返回ModelAndView。
+Step7：处理器适配器向前端控制器返回ModelAndView(ModelAndView是SpringMVC的一个底层对象，包括Model和view)。
+Step8：前端控制器请求视图解析器进行视图解析(根据逻辑视图名解析成真正的视图(jsp))。
+Step9：视图解析器向前端控制器返回View。
+Step10：前端控制器进行视图渲染(视图渲染将模型数据(保存在ModelAndView中)填充到request域)。
+Step11：前端控制器向用户响应结果。
