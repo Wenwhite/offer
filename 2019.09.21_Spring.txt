@@ -21,3 +21,8 @@ Step8：前端控制器请求视图解析器进行视图解析(根据逻辑视�
 Step9：视图解析器向前端控制器返回View。
 Step10：前端控制器进行视图渲染(视图渲染将模型数据(保存在ModelAndView中)填充到request域)。
 Step11：前端控制器向用户响应结果。
+
+4.什么是Spring Bean？
+Spring Bean是构成Spring应用核心的Java对象。这些对象由Spring IOC容器实例化、组装、管理。这些对象通过容器中配置的元数据创建，例如使用XML文件中的定义。
+在<bean>标签中有一个属性为"singleton"，如果设为true，则该bean是单例的，如果设为false，该bean是原型bean。
+Singleton属性默认值问true，因此，Spring框架中的所有bean都默认为单例bean。
