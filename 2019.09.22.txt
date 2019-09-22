@@ -8,3 +8,11 @@ ServletContextResource：访问相对于ServletContext路径里的资源的实�
 InputStreamResource：访问输入流资源的实现类。
 ByteArrayResource：访问字节数组资源的实现类。
 这些Resource实现类，针对不同的底层资源，提供了相应的资源访问逻辑，并提供便捷的包装，以利于客户端程序的资源访问。
+
+9.解释自动装配的各种模式？
+自动装配提供五种不同的模式供Spring容器用来自动装配beans之间的依赖注入：
+【no】：默认的方式是不进行自动装配，通过人工设置ref属性来进行装配bean。
+【byName】：通过参数名自动装配，Spring容器查找beans的属性，这些beans在XML配置文件中被设置为byName。之后容器视图匹配、装配和该bean的属性具有相同名字的bean。
+【byType】：通过参数的数据类型自动装配，Spring容器查找beans的属性，这些beans在XML配置文件中被设置为byType。之后容器视图匹配、装配和该bean的属性类型一样的bean。如果有多个bean符合条件，则抛出错误。
+【constructor】：同byType类似，不过是应用于构造函数的参数。如果在BeanFactory中不是恰好有一个bean与构造函数参数相同类型，则抛出一个错误。
+【autodetect】：如果有默认的构造方法，通过construct的方式自动装配，否则使用byType的方式自动装配。
